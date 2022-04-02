@@ -1,0 +1,14 @@
+.vscode/
+.idea/
+node_modules/
+*.log
+temp/
+tmp/*
+!tmp/.gitkeep
+.env
+dist/
+yarn.lock
+
+
+uploads/*
+!uploads/.gitkeep

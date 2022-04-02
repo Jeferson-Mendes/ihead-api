@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true,
+      "strictPropertyInitialization": false,
+      "baseUrl": "./src",
+      // "allowJs": true,
+      "typeRoots":[
+        "./src/@types",
+        "./node_modules/@types"
+      ],
+      "paths": {
+        "@modules/*": ["modules/*"],
+        "@core/*": ["core/*"],
+      },
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "forceConsistentCasingInFileNames": true
+    },
+  }
