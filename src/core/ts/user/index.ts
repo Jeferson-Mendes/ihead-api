@@ -3,3 +3,8 @@ export interface IUser {
   name: string;
   email: string;
 }
+
+export enum UserRolesEnum {
+  USER = 'User',
+  MODERATOR = 'Moderator',
+}

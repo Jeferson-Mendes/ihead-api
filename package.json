@@ -12,12 +12,15 @@
     "@typegoose/typegoose": "^9.7.1",
     "bcrypt": "^5.0.1",
     "celebrate": "^15.0.1",
+    "cloudinary": "^1.29.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
+    "google-auth-library": "^7.14.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
+    "multer": "^1.4.4",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
@@ -36,6 +39,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/multer": "^1.4.7",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
