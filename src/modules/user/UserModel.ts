@@ -1,5 +1,5 @@
 import { UserRolesEnum } from '@core/ts/user';
-import { Article } from '@modules/article/ArticleModel';
+// import { Article } from '@modules/article/ArticleModel';
 import { Resource } from '@modules/resource/ResourceModel';
 import { getModelForClass, pre, prop, Ref } from '@typegoose/typegoose';
 import BcryptService from './utils/BcryptFeatures';
@@ -30,8 +30,8 @@ export class User {
   @prop()
   public phoneNumber: string;
 
-  @prop({ ref: () => Article })
-  public articles: Ref<Article[]>;
+  // @prop({ ref: () => Article })
+  // public articles: Ref<Article[]>;
 
   @prop()
   public picture?: string;

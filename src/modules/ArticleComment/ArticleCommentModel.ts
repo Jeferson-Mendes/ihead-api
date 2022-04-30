@@ -3,10 +3,10 @@ import { User } from '@modules/user/UserModel';
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
 
 export class ArticleComment {
-  @prop({ ref: () => User })
+  @prop({ ref: 'User' })
   public user: Ref<User>;
 
-  @prop({ ref: () => Article })
+  @prop({ ref: 'Article' })
   public article: Ref<Article>;
 
   @prop()

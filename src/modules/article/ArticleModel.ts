@@ -8,10 +8,10 @@ export class Article {
   @prop()
   public title!: string;
 
-  @prop({ ref: () => User })
+  @prop({ ref: 'User' })
   public author: Ref<User>;
 
-  @prop({ ref: () => Resource })
+  @prop({ ref: 'Resource' })
   public coverImage?: Ref<Resource>;
 
   @prop()
@@ -29,7 +29,7 @@ export class Article {
   @prop()
   public description: number;
 
-  @prop({ ref: () => ArticleComment })
+  @prop({ ref: 'ArticleComment' })
   public comments: Ref<ArticleComment[]>;
 
   @prop()
