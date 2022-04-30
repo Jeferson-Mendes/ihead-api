@@ -9,7 +9,7 @@ export default class UserAuthController {
   public async login(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body;
 
-    const userExists = await UserModel.findOne({ email });
+    const userExists = await UserModel.findOne({ email }).populate('resource');
 
     const bcryptService = new BcryptService();
     if (

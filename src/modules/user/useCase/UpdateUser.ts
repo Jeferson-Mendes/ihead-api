@@ -72,7 +72,7 @@ export default class UpdateUserService {
           userId,
           userData,
           { new: true, runValidators: true },
-        );
+        ).populate('resource');
 
         return updatedUser;
       }
@@ -108,7 +108,7 @@ export default class UpdateUserService {
             userId,
             userData,
             { new: true, runValidators: true },
-          );
+          ).populate('resource');
 
           return updatedUser;
         }
@@ -128,7 +128,7 @@ export default class UpdateUserService {
           userId,
           userData,
           { new: true, runValidators: true },
-        );
+        ).populate('resource');
 
         return updatedUser;
       }
