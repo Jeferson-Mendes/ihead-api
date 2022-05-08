@@ -1,6 +1,8 @@
 export enum CategoryArticleEnum {
   HTML = 'Html',
   CSS = 'Css',
+  FRONTEND = 'Front-end',
+  BACKEND = 'Back-end',
   BOOTSTRAP = 'Bootstrap',
   JAVASCRIPT = 'JavaScript',
   JQUERY = 'Jquery',

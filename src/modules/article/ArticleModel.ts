@@ -15,19 +15,19 @@ export class Article {
   public coverImage?: Ref<Resource>;
 
   @prop()
-  public articleContent?: string;
+  public articleContent: string;
 
   @prop({ type: String, enum: CategoryArticleEnum })
   public category: CategoryArticleEnum;
 
-  @prop()
+  @prop({ default: 0 })
   public likes: number;
 
-  @prop()
+  @prop({ default: 0 })
   public views: number;
 
   @prop()
-  public description: number;
+  public description: string;
 
   @prop({ ref: 'ArticleComment' })
   public comments: Ref<ArticleComment[]>;
@@ -35,8 +35,11 @@ export class Article {
   @prop()
   public githubRepoLink?: string;
 
-  @prop()
+  @prop({ default: 0 })
   public reportsReceived: number;
+
+  @prop({ type: [String] })
+  public references?: string[];
 }
 
 const ArticleModel = getModelForClass(Article, {
