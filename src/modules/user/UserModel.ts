@@ -15,7 +15,7 @@ export class User {
   @prop()
   public name!: string;
 
-  @prop()
+  @prop({ unique: true })
   public email: string;
 
   @prop()
@@ -62,13 +62,16 @@ export class User {
   })
   public userRole: UserRolesEnum;
 
-  @prop()
+  @prop({ default: 0 })
   public publicationsNumber: number;
 
-  @prop()
+  @prop({ default: 0 })
+  public commentsNumber: number;
+
+  @prop({ default: 0 })
   public reportsReceived: number;
 
-  @prop()
+  @prop({ default: 0 })
   public contributionTotalHours: number;
 }
 

@@ -1,3 +1,4 @@
+import { AppError } from '@core/errors/AppError';
 import UserModel, { User } from '../UserModel';
 
 interface IRequest {
@@ -20,6 +21,13 @@ export default class CreateUserService {
     phoneNumber,
     semester,
   }: IRequest): Promise<User> {
+    const formattedEmail = email.toLowerCase().trim();
+    const emailExists = await UserModel.findOne({ email: formattedEmail });
+
+    if (emailExists) {
+      throw new AppError('Email já está send utilizado');
+    }
+
     try {
       const user = await UserModel.create({
         name,

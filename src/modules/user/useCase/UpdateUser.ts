@@ -36,7 +36,7 @@ export default class UpdateUserService {
 
       if (
         UserEmailAlreadyExists &&
-        UserEmailAlreadyExists.email !== userExists.email
+        String(UserEmailAlreadyExists.id) !== String(userId)
       ) {
         throw new AppError('Email already registered', 401);
       }
