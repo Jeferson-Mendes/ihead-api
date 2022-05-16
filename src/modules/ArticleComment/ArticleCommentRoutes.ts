@@ -10,5 +10,13 @@ ArticleCommentRoutes.get(
   articleController.getByArticle,
 );
 ArticleCommentRoutes.post('/', articleController.create);
+ArticleCommentRoutes.post(
+  '/add-favorite/:articleCommentId',
+  articleController.addFavoriteComment,
+);
+ArticleCommentRoutes.delete(
+  '/delete-favorite/:articleCommentId',
+  articleController.removeFavoriteComment,
+);
 
 export default ArticleCommentRoutes;

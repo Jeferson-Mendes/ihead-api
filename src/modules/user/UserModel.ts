@@ -1,4 +1,6 @@
 import { UserRolesEnum } from '@core/ts/user';
+import { Article } from '@modules/article/ArticleModel';
+import { ArticleComment } from '@modules/ArticleComment/ArticleCommentModel';
 // import { Article } from '@modules/article/ArticleModel';
 import { Resource } from '@modules/resource/ResourceModel';
 import { getModelForClass, pre, prop, Ref } from '@typegoose/typegoose';
@@ -73,6 +75,12 @@ export class User {
 
   @prop({ default: 0 })
   public contributionTotalHours: number;
+
+  @prop({ type: Object, ref: 'Article' })
+  public favoriteArticles: Article[];
+
+  @prop({ type: Object, ref: 'ArticleComment' })
+  public favoriteArticleComments: ArticleComment[];
 }
 
 const UserModel = getModelForClass(User, {

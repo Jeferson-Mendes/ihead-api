@@ -1,7 +1,9 @@
 import { Auth } from '@modules/auth/decorators/Auth';
 import { Request, Response } from 'express';
+import AddFavoriteCommentService from './useCase/AddFavoriteComment';
 import CreateArticleCommentService from './useCase/CreateArticleComment';
 import GetArticleCommentsService from './useCase/GetArticleComments';
+import RemoveFavoriteCommentService from './useCase/RemoveFavoriteComment';
 
 export default class ArticleCommentController {
   @Auth
@@ -37,5 +39,41 @@ export default class ArticleCommentController {
     });
 
     return response.json({ comments, quantity: commentsQtd, status: 200 });
+  }
+
+  @Auth
+  public async addFavoriteComment(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    const { articleCommentId } = req.params;
+    const { id } = req.user;
+
+    const addFavoriteComment = new AddFavoriteCommentService();
+
+    const isSuccess = await addFavoriteComment.execute({
+      articleCommentId,
+      userId: id,
+    });
+
+    return res.json({ isSuccess, status: 200 });
+  }
+
+  @Auth
+  public async removeFavoriteComment(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    const { articleCommentId } = req.params;
+    const { id } = req.user;
+
+    const removeFavoriteComment = new RemoveFavoriteCommentService();
+
+    const isSuccess = await removeFavoriteComment.execute({
+      articleCommentId,
+      userId: id,
+    });
+
+    return res.json({ isSuccess, status: 200 });
   }
 }
