@@ -88,12 +88,16 @@ export default class ArticleController {
   @Auth
   public async detail(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
+    const userId = request.user.id;
 
     const detailArticleService = new DetailArticleService();
 
-    const article = await detailArticleService.execute(id);
+    const { article, isFavorite } = await detailArticleService.execute(
+      id,
+      userId,
+    );
 
-    return response.json({ article, status: 200 });
+    return response.json({ article, isFavorite, status: 200 });
   }
 
   @Auth

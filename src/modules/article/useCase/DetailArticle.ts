@@ -1,13 +1,23 @@
 import { AppError } from '@core/errors/AppError';
+import UserModel from '@modules/user/UserModel';
 import { isValidObjectId } from 'mongoose';
 import ArticleModel, { Article } from '../ArticleModel';
 
 export default class DetailArticleService {
-  public async execute(id: string): Promise<Article> {
+  public async execute(
+    id: string,
+    userId: string,
+  ): Promise<{ article: Article; isFavorite: boolean }> {
     const isValidId = isValidObjectId(id);
 
     if (!isValidId) {
       throw new AppError('ID inválido');
+    }
+
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      throw new AppError('Usuário não encontrado.');
     }
 
     const article = await ArticleModel.findById(id)
@@ -24,6 +34,8 @@ export default class DetailArticleService {
       $inc: { views: 1 },
     });
 
-    return article;
+    const isFavorite = user.favoriteArticles.includes(article._id);
+
+    return { article, isFavorite };
   }
 }
