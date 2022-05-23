@@ -11,6 +11,14 @@ export default class UserAuthController {
 
     const userExists = await UserModel.findOne({ email }).populate('resource');
 
+    if (userExists) {
+      if (userExists.googleId || userExists.picture) {
+        throw new AppError(
+          'Usuário google. Entre utilizando o botão "Login com o google."',
+        );
+      }
+    }
+
     const bcryptService = new BcryptService();
     if (
       !userExists ||
