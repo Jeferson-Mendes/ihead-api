@@ -19,4 +19,6 @@ ArticleCommentRoutes.delete(
   articleController.removeFavoriteComment,
 );
 
+ArticleCommentRoutes.delete('/delete/:commentId', articleController.delete);
+
 export default ArticleCommentRoutes;

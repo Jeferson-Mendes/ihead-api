@@ -28,4 +28,5 @@ export enum CategoryArticleEnum {
   RASPBERRY_Pi = 'Raspberry Pi',
   GIT = 'Git',
   AWS_CLOUD = 'Aws Cloud',
+  OTHER = 'Outra',
 }

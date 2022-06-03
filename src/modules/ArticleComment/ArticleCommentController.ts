@@ -4,6 +4,7 @@ import AddFavoriteCommentService from './useCase/AddFavoriteComment';
 import CreateArticleCommentService from './useCase/CreateArticleComment';
 import GetArticleCommentsService from './useCase/GetArticleComments';
 import RemoveFavoriteCommentService from './useCase/RemoveFavoriteComment';
+import DeleteCommentService from './useCase/DeleteComment';
 
 export default class ArticleCommentController {
   @Auth
@@ -75,5 +76,17 @@ export default class ArticleCommentController {
     });
 
     return res.json({ isSuccess, status: 200 });
+  }
+
+  @Auth
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { commentId } = req.params;
+    const { id } = req.user;
+
+    const deleteComment = new DeleteCommentService();
+
+    const { deleted } = await deleteComment.execute({ user: id, commentId });
+
+    return res.json({ deleted, status: 200 });
   }
 }
