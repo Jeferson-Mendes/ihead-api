@@ -11,7 +11,19 @@ export default class ListReportsService {
     const paramPage = parseInt(String(page)) || 1;
     const skip = paramLimit * (paramPage - 1);
 
-    const reports = await ReportModel.find().limit(paramLimit).skip(skip);
+    const reports = await ReportModel.find()
+      .populate({
+        path: 'denounced',
+        select: 'name picture',
+        populate: { path: 'resource' },
+      })
+      .populate('publication', 'title')
+      .populate({
+        path: 'comment',
+        populate: { path: 'article', select: 'title' },
+      })
+      .limit(paramLimit)
+      .skip(skip);
 
     return reports;
   }

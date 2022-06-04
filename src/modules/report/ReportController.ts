@@ -20,11 +20,11 @@ export default class ReportController {
 
   @Auth
   public async create(req: Request, res: Response): Promise<Response> {
-    const { comment, publication } = req.body;
+    const { comment, publication, reason } = req.body;
 
     const createReport = new CreateReportService();
 
-    const report = await createReport.execute({ comment, publication });
+    const report = await createReport.execute({ comment, publication, reason });
 
     return res.json({ report, status: 200 });
   }

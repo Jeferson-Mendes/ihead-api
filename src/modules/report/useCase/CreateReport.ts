@@ -7,12 +7,14 @@ import ReportModel, { Report } from '../ReportModel';
 interface IRequest {
   publication?: string;
   comment?: string;
+  reason: string;
 }
 
 export default class CreateReportService {
   public async execute({
     publication,
     comment,
+    reason,
   }: IRequest): Promise<Report | undefined> {
     if (publication && comment) {
       throw new AppError(
@@ -31,6 +33,7 @@ export default class CreateReportService {
         denounced: publicationExists.author,
         type: 'Article',
         publication,
+        reason,
       };
 
       const createdReport = await ReportModel.create(data);
@@ -54,6 +57,7 @@ export default class CreateReportService {
         denounced: commentExists.user,
         type: 'Comment',
         comment,
+        reason,
       };
 
       const createdReport = await ReportModel.create(data);

@@ -15,7 +15,7 @@ export class ArticleComment {
   @prop()
   public numberLikes: number;
 
-  @prop()
+  @prop({ default: 0 })
   public reportsReceived: number;
 }
 

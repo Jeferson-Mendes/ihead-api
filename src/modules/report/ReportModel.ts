@@ -15,6 +15,9 @@ export class Report {
   @prop({ type: String, enum: ReportTypeEnum })
   public type: ReportTypeEnum;
 
+  @prop()
+  public reason: string;
+
   @prop({ ref: 'Article' })
   public publication?: Ref<Article>;
 
