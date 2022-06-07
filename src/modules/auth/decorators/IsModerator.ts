@@ -12,6 +12,7 @@ export function IsModerator(
 ): void {
   const method = propertyDescriptor.value;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propertyDescriptor.value = async function (...args: any[]) {
     const user = args[0].user;
 

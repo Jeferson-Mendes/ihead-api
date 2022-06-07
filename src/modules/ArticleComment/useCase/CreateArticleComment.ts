@@ -33,6 +33,15 @@ export default class CreateArticleCommentService {
         commentContent,
       });
 
+      const commentsInThisArticle = await ArticleCommentModel.find({
+        article: article,
+        user: user,
+      }).count();
+
+      if (commentsInThisArticle <= 2) {
+        userExists.contributionTotalHours += 5; // Minutes;
+      }
+
       userExists.commentsNumber += 1;
       await userExists.save();
 
