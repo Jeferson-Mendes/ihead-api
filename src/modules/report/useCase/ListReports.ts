@@ -6,7 +6,10 @@ interface IRequest {
 }
 
 export default class ListReportsService {
-  public async execute({ limit, page }: IRequest): Promise<Report[]> {
+  public async execute({
+    limit,
+    page,
+  }: IRequest): Promise<{ reports: Report[]; reportsNumber: number }> {
     const paramLimit = parseInt(String(limit)) || 10;
     const paramPage = parseInt(String(page)) || 1;
     const skip = paramLimit * (paramPage - 1);
@@ -14,10 +17,10 @@ export default class ListReportsService {
     const reports = await ReportModel.find()
       .populate({
         path: 'denounced',
-        select: 'name picture',
+        select: 'name picture email phoneNumber',
         populate: { path: 'resource' },
       })
-      .populate('publication', 'title')
+      .populate('publication', 'title category')
       .populate({
         path: 'comment',
         populate: { path: 'article', select: 'title' },
@@ -25,6 +28,8 @@ export default class ListReportsService {
       .limit(paramLimit)
       .skip(skip);
 
-    return reports;
+    const reportsNumber = await ReportModel.find().count();
+
+    return { reports, reportsNumber };
   }
 }
