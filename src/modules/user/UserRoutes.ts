@@ -6,6 +6,7 @@ import {
   createUserValidator,
   loginValidator,
   updateUserValidator,
+  updateUserPasswordValidator,
 } from './UserValidators';
 
 const UserRoutes = Router();
@@ -24,6 +25,12 @@ UserRoutes.put(
   uploadConfig.single('file'),
   updateUserValidator,
   userController.update,
+);
+
+UserRoutes.patch(
+  '/update/change-password',
+  updateUserPasswordValidator,
+  userController.changePassword,
 );
 
 export default UserRoutes;

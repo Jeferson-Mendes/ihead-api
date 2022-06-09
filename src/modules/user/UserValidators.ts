@@ -39,3 +39,10 @@ export const updateUserValidator = celebrate({
     semester: Joi.number().optional(),
   },
 });
+
+export const updateUserPasswordValidator = celebrate({
+  [Segments.BODY]: {
+    currentPassword: Joi.string().required(),
+    newPassword: Joi.string().required(),
+  },
+});

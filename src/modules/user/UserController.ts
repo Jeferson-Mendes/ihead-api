@@ -4,6 +4,7 @@ import CreateUserService from './useCase/CreateUser';
 import DetailUserService from './useCase/DetailUser';
 import ListUserService from './useCase/ListUser';
 import UpdateUserService from './useCase/UpdateUser';
+import UpdateUserPassword from './useCase/UpdateUserPassword';
 
 export default class UserController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -68,6 +69,22 @@ export default class UserController {
       phoneNumber,
       semester,
       file: req.file,
+    });
+
+    return res.json({ user, status: 200 });
+  }
+
+  @Auth
+  public async changePassword(req: Request, res: Response): Promise<Response> {
+    const { currentPassword, newPassword } = req.body;
+    const { id } = req.user;
+
+    const updateUserPassword = new UpdateUserPassword();
+
+    const user = await updateUserPassword.execute({
+      currentPassword,
+      newPassword,
+      user_id: id,
     });
 
     return res.json({ user, status: 200 });
