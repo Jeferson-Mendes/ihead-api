@@ -9,12 +9,18 @@ interface IRequest {
   userId: string;
 }
 
+interface ISerializedArticle {
+  article: Article;
+  isFavorite: boolean;
+}
+
+interface IResponse {
+  serializedArticles: ISerializedArticle[];
+  resultsNumber: number;
+}
+
 export default class GetArticlesByUserService {
-  public async execute({
-    userId,
-    limit,
-    page,
-  }: IRequest): Promise<{ article: Article; isFavorite: boolean }[]> {
+  public async execute({ userId, limit, page }: IRequest): Promise<IResponse> {
     const paramLimit = parseInt(String(limit)) || 10;
     const paramPage = parseInt(String(page)) || 1;
     const skip = paramLimit * (paramPage - 1);
@@ -37,6 +43,8 @@ export default class GetArticlesByUserService {
       .populate('coverImage')
       .populate('author');
 
+    const resultsNumber = await ArticleModel.find({ author: userId }).count();
+
     const serializedArticles = articles.map(article => {
       const isFavorite = user.favoriteArticles.includes(article.id);
       if (isFavorite) {
@@ -48,6 +56,6 @@ export default class GetArticlesByUserService {
       return { article, isFavorite: false };
     });
 
-    return serializedArticles;
+    return { serializedArticles, resultsNumber };
   }
 }

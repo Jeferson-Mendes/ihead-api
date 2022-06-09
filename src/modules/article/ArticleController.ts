@@ -76,13 +76,18 @@ export default class ArticleController {
 
     const getArticlesByUserService = new GetArticlesByUserService();
 
-    const articles = await getArticlesByUserService.execute({
-      userId,
-      limit: Number(limit),
-      page: Number(page),
-    });
+    const { serializedArticles, resultsNumber } =
+      await getArticlesByUserService.execute({
+        userId,
+        limit: Number(limit),
+        page: Number(page),
+      });
 
-    return response.json({ articles, status: 200 });
+    return response.json({
+      articles: serializedArticles,
+      resultsNumber,
+      status: 200,
+    });
   }
 
   @Auth

@@ -1,6 +1,7 @@
 import { AppError } from '@core/errors/AppError';
 import UserModel from '@modules/user/UserModel';
 import ArticleCommentModel from '../ArticleCommentModel';
+import ReportModel from '@modules/report/ReportModel';
 import { UserRolesEnum } from '@core/ts/user';
 
 interface IRequest {
@@ -35,11 +36,16 @@ export default class DeleteCommentService {
       throw new AppError('Sem permissão para excluir este artigo.');
     }
 
-    if (comment.reportsReceived > 0) {
+    const openReports = await ReportModel.find({ comment: commentId }).count();
+
+    if (openReports > 0) {
       throw new AppError(
         'Ação indisponível. Este comentário possui denúncias.',
       );
     }
+
+    userExists.contributionTotalHours -= 5;
+    await userExists.save();
 
     try {
       await ArticleCommentModel.deleteOne({ _id: commentId });
