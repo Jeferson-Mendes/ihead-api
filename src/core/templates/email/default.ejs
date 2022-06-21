@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email</title>
+  <style>
+    * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; line-height: 1.65; }
+    img { max-width: 100%; height: 300px; margin: 0 auto; display: block; }
+    body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
+    a:hover { text-decoration: underline; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-left { text-align: left; }
+    h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
+    h1 { font-size: 32px; color: #019267; background-color: whitesmoke; letter-spacing: 10px; border-radius: 2rem;}
+    h2 { font-size: 28px; }
+    h3 { font-size: 24px; }
+    h4 { font-size: 20px; }
+    h5 { font-size: 16px; }
+    p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+    .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
+    .container table { width: 100% !important; border-collapse: collapse; }
+    .container .masthead { background: #00C897; text-align: center }
+    .container .content { background: #fff; padding: 30px 35px; text-align: center; }
+    .container .content h2, p, strong { color: #374151; }
+    .container .content strong { font-size: 25px; }
+    .container .content strong { font-size: 35px; }
+    .container .content.footer { background: none; }
+    .container .content.footer p { margin-bottom: 0; color: #374151; text-align: center; font-size: 14px; }
+    .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+    .container .content.footer a:hover { text-decoration: underline; }
+    .content p a {
+    text-decoration: none;
+    font-weight: bold;
+    color: '#1E3163';
+    transition: all 400ms;
+    }
+    .content p a:hover {
+    opacity: 0.5
+    }
+    .content .info {
+    font-size: 0.8rem;
+    }
+    tr td p {
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <table class="body-wrap">
+    <tr>
+      <td class="container">
+            <table>
+                <tr>
+                    <td class="masthead">
+                        <h2>Bem-vindo(a) ao iHead!</h2>
+                      <p>Segue instruções para ativação da sua conta.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="content">
+                        <h2>Olá, <%= name %>. </h2>
+                        <p>Para ativar a sua conta e começar a compartilhar conhecimento basta informar o código a seguir na tela de ativação.</p>
+                      <p>Este é o seu código de ativação:</p>
+                      <h1> <%= code %> </h1>
+                          <p class='info'>Caso você não tenha feito esta solicitação, considere ignorar.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="container">
+            <table>
+                <tr>
+                    <td class="content footer">
+                        <p>iHead</p>
+                        <p>2022</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
