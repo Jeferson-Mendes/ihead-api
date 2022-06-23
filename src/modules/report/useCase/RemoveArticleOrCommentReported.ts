@@ -54,7 +54,7 @@ export default class RemoveArticleOrCommentReported {
       if (user.contributionTotalHours - 5 < 0) {
         user.contributionTotalHours = 0; // minutes;
       } else {
-        user.contributionTotalHours -= 50; // minutes;
+        user.contributionTotalHours -= 5; // minutes;
       }
 
       await user.save();

@@ -3,6 +3,7 @@ import cloudinary from '@core/config/cloudinary';
 import ResourceModel from '@modules/resource/ResourceModel';
 import { AppError } from '@core/errors/AppError';
 import UserModel from '@modules/user/UserModel';
+import ReportModel from '@modules/report/ReportModel';
 
 interface IRequest {
   author: string;
@@ -21,6 +22,14 @@ export default class DeleteArticleService {
 
     if (articleId === 'undefined') {
       throw new AppError('Falha ao atualizar artigo, tente novamente');
+    }
+
+    const openReports = await ReportModel.find({
+      publication: articleId,
+    }).count();
+
+    if (openReports > 0) {
+      throw new AppError('Ação indisponível. Este artigo possui denúncias.');
     }
 
     const article = await ArticleModel.findById(articleId);
@@ -46,10 +55,16 @@ export default class DeleteArticleService {
             articleId,
           );
 
+          user.contributionTotalHours -= 60; // minutes
+          await user.save();
+
           return deletedArticle;
         }
       } else {
         const deletedArticle = await ArticleModel.findByIdAndDelete(articleId);
+
+        user.contributionTotalHours -= 60; // minutes
+        await user.save();
 
         return deletedArticle;
       }
