@@ -7,6 +7,8 @@ import DetailArticleService from './useCase/DetailArticle';
 import AddFavoriteArticleService from './useCase/AddFavoriteArticle';
 import RemoveFavoriteArticleService from './useCase/RemoveFavoriteArticle';
 import { CategoryArticleEnum } from '@core/ts/article';
+import UpdateArticleService from './useCase/UpdateArticle';
+import DeleteArticleService from './useCase/DeleteArticle';
 
 export default class ArticleController {
   @Auth
@@ -139,5 +141,40 @@ export default class ArticleController {
     });
 
     return res.json({ isSuccess, status: 200 });
+  }
+
+  @Auth
+  public async updateArticle(req: Request, res: Response): Promise<Response> {
+    const { title, articleContent, category, description, references } =
+      req.body;
+
+    const { articleId } = req.params;
+    const { id } = req.user;
+    const updateArticleService = new UpdateArticleService();
+
+    const article = await updateArticleService.execute({
+      title,
+      articleContent,
+      author: id,
+      category,
+      description,
+      references,
+      file: req.file,
+      articleId,
+    });
+
+    return res.json({ article, status: 200 });
+  }
+
+  @Auth
+  public async deleteArticle(req: Request, res: Response): Promise<Response> {
+    const { articleId } = req.params;
+    const { id } = req.user;
+
+    const deleteArticle = new DeleteArticleService();
+
+    await deleteArticle.execute({ author: id, articleId });
+
+    return res.status(204).json();
   }
 }

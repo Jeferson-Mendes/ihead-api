@@ -14,6 +14,13 @@ ArticleRoutes.post(
   '/add-favorite/:articleId',
   articleController.addFavoriteArticle,
 );
+ArticleRoutes.put(
+  '/update/:articleId',
+  uploadConfig.single('file'),
+  articleController.updateArticle,
+);
+
+ArticleRoutes.delete('/:articleId', articleController.deleteArticle);
 ArticleRoutes.delete(
   '/remove-favorite/:articleId',
   articleController.removeFavoriteArticle,
