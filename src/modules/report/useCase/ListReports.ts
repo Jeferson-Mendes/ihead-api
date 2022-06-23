@@ -26,7 +26,8 @@ export default class ListReportsService {
         populate: { path: 'article', select: 'title' },
       })
       .limit(paramLimit)
-      .skip(skip);
+      .skip(skip)
+      .sort({ createdAt: -1 });
 
     const reportsNumber = await ReportModel.find().count();
 

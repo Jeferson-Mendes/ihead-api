@@ -12,7 +12,7 @@ export default class UserAuthController {
     const userExists = await UserModel.findOne({ email }).populate('resource');
 
     if (userExists) {
-      if (userExists.googleId || userExists.picture) {
+      if (userExists.isGoogleAccount || userExists.picture) {
         throw new AppError(
           'Usuário google. Entre utilizando o botão "Login com o google."',
         );
@@ -52,6 +52,7 @@ export default class UserAuthController {
         email: userGoogle.email,
         picture: userGoogle.picture,
         googleId: userGoogle.sub,
+        isGoogleAccount: true,
       };
 
       const createdUser = await UserModel.create(userData);

@@ -44,6 +44,9 @@ export class User {
   @prop({ select: false })
   public googleId?: string;
 
+  @prop({ default: false })
+  public isGoogleAccount: boolean;
+
   @prop()
   public githubLink?: string;
 

@@ -36,6 +36,19 @@ export default class DetailArticleService {
 
     const isFavorite = user.favoriteArticles.includes(article._id);
 
-    return { article, isFavorite };
+    if (article.references.length > 1 || !article.references.length) {
+      return { article, isFavorite };
+    }
+
+    const parseArticleRef = JSON.parse(String(article.references));
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const currentArticle = article as any;
+    const serializedArticle = {
+      ...currentArticle._doc,
+      references: parseArticleRef,
+    };
+
+    return { article: serializedArticle, isFavorite };
   }
 }

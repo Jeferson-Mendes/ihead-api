@@ -31,6 +31,20 @@ export default class UpdateUserService {
       throw new AppError('User not found');
     }
 
+    if (userExists.isGoogleAccount) {
+      if (email) {
+        throw new AppError(
+          'Você não pode alterar o email de uma conta da google.',
+        );
+      }
+
+      if (file) {
+        throw new AppError(
+          'Você não pode alterar a imagem de uma conta da google.',
+        );
+      }
+    }
+
     if (email) {
       const UserEmailAlreadyExists = await UserModel.findOne({ email });
 

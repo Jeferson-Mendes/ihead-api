@@ -57,6 +57,7 @@ export default class GetArticlesService {
     })
       .limit(paramLimit)
       .skip(skip)
+      .sort({ createdAt: -1 })
       .populate('coverImage')
       .populate('author');
 

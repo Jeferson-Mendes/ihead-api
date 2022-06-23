@@ -39,7 +39,7 @@ export class Article {
   public reportsReceived: number;
 
   @prop({ type: [String] })
-  public references?: string[];
+  public references: string[];
 }
 
 const ArticleModel = getModelForClass(Article, {

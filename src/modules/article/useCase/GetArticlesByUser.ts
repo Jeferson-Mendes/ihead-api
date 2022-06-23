@@ -40,6 +40,7 @@ export default class GetArticlesByUserService {
     const articles = await ArticleModel.find({ author: userId })
       .limit(paramLimit)
       .skip(skip)
+      .sort({ createdAt: -1 })
       .populate('coverImage')
       .populate('author');
 
