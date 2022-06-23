@@ -87,7 +87,7 @@ export default class CreateArticleService {
         const article = await ArticleModel.create(articleData);
 
         if (checkPublication.length >= 1000) {
-          user.contributionTotalHours += 1;
+          user.contributionTotalHours += 60;
         }
 
         user.publicationsNumber += 1;
